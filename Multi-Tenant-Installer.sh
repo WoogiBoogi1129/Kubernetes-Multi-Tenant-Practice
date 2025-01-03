@@ -7,17 +7,17 @@ if ! [[ "$start" =~ ^[0-9]+$ ]] || ! [[ "$end" =~ ^[0-9]+$ ]] || [ "$start" -gt 
   exit 1
 fi
 
-for ((i=start; i<=end; i++))
-do
-  sudo adduser student-$i
-done
+# for ((i=start; i<=end; i++))
+# do
+#  sudo adduser student-$i
+# done
 
 for ((i=start; i<=end; i++))
 do
-  kubectl create ns student-$i
+ kubectl create ns student-$i
 done
 
-sudo mkdir $HOME/Kubernetes-Multi-Tenant-Practice/csr
+mkdir $HOME/Kubernetes-Multi-Tenant-Practice/csr
 cd $HOME/Kubernetes-Multi-Tenant-Practice/csr/
 
 for ((i=start; i<=end; i++))
@@ -49,8 +49,8 @@ done
 
 for ((i=start; i<=end; i++))
 do
-  cd $HOME/Kubernetes-Multi-Tenant-Practice/csr/student-$i/
-  kubectl get csr student-$i -o jsonpath='{.status.certificate}' | base64 -d > student-$i.crt
+  cd $HOME/Kubernetes-Multi-Tenant-Practice/csr/student-$i
+  kubectl get csr student-$i -o jsonpath='{.status.certificate}'| base64 -d > student-$i.crt
   kubectl config set-credentials student-$i --client-key=student-$i.key --client-certificate=student-$i.crt --embed-certs=true
   kubectl config set-context student-$i --cluster=kubernetes --user=student-$i --namespace=student-$i
   cd ..
@@ -68,7 +68,7 @@ do
         kubectl create clusterrolebinding node-rolebinding-$i --user=student-$i --clusterrole=node-role
 done
 
-sudo mkdir $HOME/Kubernetes-Multi-Tenant-Practice/kubeconfig-file
+mkdir $HOME/Kubernetes-Multi-Tenant-Practice/kubeconfig-file
 
 for((i=start; i<=end; i++))
 do

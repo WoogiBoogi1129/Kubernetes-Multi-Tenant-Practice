@@ -27,6 +27,7 @@ for ((i=start; i<=end; i++))
 do
   kubectl config delete-context student-$i
   kubectl delete namespace student-$i
-  sudo deluser student-$i
-  sudo rm -rf /home/student-$i
+  kubectl delete csr student-$i
+  #sudo deluser student-$i
+  sudo rm -rf /home/student-$i/.kube
 done

@@ -7,7 +7,7 @@ if ! [[ "$start" =~ ^[0-9]+$ ]] || ! [[ "$end" =~ ^[0-9]+$ ]] || [ "$start" -gt 
   exit 1
 fi
 
-sudo mkdir $HOME/Kubernetes-Multi-Tenant-Practice/kubeconfig-file
+mkdir $HOME/Kubernetes-Multi-Tenant-Practice/kubeconfig-file
 
 for((i=start; i<=end; i++))
 do
