@@ -7,6 +7,7 @@ if ! [[ "$start" =~ ^[0-9]+$ ]] || ! [[ "$end" =~ ^[0-9]+$ ]] || [ "$start" -gt 
   exit 1
 fi
 
+# user도 만들지 않은 상태면 주석 풀기
 # for ((i=start; i<=end; i++))
 # do
 #  sudo adduser student-$i
